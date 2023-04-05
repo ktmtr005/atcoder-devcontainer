@@ -1,0 +1,39 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
+{
+	"name": "AtCoder Environment",
+
+	"dockerComposeFile": [
+		"docker-compose.yml"
+	],
+	"service": "dev",
+	"workspaceFolder": "/home/vscode",
+
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	// "features": {},
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	"postCreateCommand": "pip3 install -U online-judge-tools",
+
+	// Configure tool-specific properties.
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"sanaajani.taskrunnercode", // Run tasks from Explorer pane
+				"ms-python.python", // Python IntelliSense (Microsoft)
+				"ms-python.vscode-pylance", // Python language server (Microsoft)
+				"ms-vscode.cpptools", // C/C++ IntelliSense (Microsoft)
+				"visualstudioexptteam.vscodeintellicode", // AI-assisted development (Microsoft)
+				"yzhang.markdown-all-in-one", // Markdown
+				"zainchen.json" // Json
+			]
+		}
+	},
+
+
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	"remoteUser": "vscode"
+}

@@ -1,0 +1,19 @@
+version: '3'
+services:
+  dev:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - USER=vscode
+
+    # イメージ名
+    image: ktmtrtr/atcoder:dev
+
+    volumes:
+      - ../AtCoder:/home/vscode/AtCoder:cached
+      - ../library:/home/vscode/library:cached
+      - ../.vscode:/home/vscode/.vscode:cached
+      - ../note:/home/vscode/note:cached
+    
+    command: /bin/sh -c "while sleep 1000; do :; done"
