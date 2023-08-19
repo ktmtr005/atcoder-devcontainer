@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM debian:bookworm-slim
 
 # インタラクティブモードにならないようにする
 ARG DEBIAN_FRONTEND=noninteractive
@@ -12,7 +12,9 @@ RUN groupadd --gid 1000 ${USER} \
 # C++, Python3, PyPy3, Rustのインストール
 RUN apt-get update \
     && apt-get install -y time tzdata tree git curl \
-    && apt-get install -y gcc g++ gdb python3 python3-pip pypy3 rust-all nodejs npm 
+    && apt-get install -y gcc g++ gdb python3 python3-pip pypy3 nodejs npm 
+
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
 # ユーザーを変更
 USER ${USER}
