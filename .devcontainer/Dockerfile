@@ -12,7 +12,9 @@ RUN groupadd --gid 1000 ${USER} \
 # C++, Python3, PyPy3, Rustのインストール
 RUN apt-get update \
     && apt-get install -y time tzdata tree git curl \
-    && apt-get install -y gcc g++ gdb python3 python3-pip pypy3 nodejs npm 
+    && apt-get install -y gcc g++ gdb python3 python3-pip pypy3
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - &&\
+    apt-get install -y nodejs
 
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
@@ -21,12 +23,12 @@ USER ${USER}
 WORKDIR /home/${USER}
 
 # Pythonライブラリをインストール
-RUN pip install numba numpy scipy scikit-learn networkx
+RUN pip install numba numpy scipy scikit-learn networkx --break-system-packages
 
 # コンテスト補助アプリケーションをインストール
-RUN pip install online-judge-tools
-RUN mkdir /home/${USER}/.npm-global \
-    && npm config set prefix '~/.npm-global'
-RUN echo "export PATH=~/.npm-global/bin:$PATH" >> /home/${USER}/.profile \
-    && . /home/${USER}/.profile
+USER root
+RUN pip install online-judge-tools --break-system-packages
+RUN npm install -g npm
 RUN npm install -g atcoder-cli
+USER ${USER}
+RUN echo 'export PATH="~/.local/bin:$PATH"' >> ~/.bashrc
