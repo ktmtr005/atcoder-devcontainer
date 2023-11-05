@@ -16,7 +16,6 @@
 	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "pip3 install -U online-judge-tools",
 
 	// Configure tool-specific properties.
 	"customizations": {
