@@ -47,7 +47,7 @@ git+https://github.com/not522/ac-library-python \
 
 # コンテスト補助アプリケーションをインストール
 USER root
-RUN pip install online-judge-tools --break-system-packages
+RUN pip install online-judge-tools online-judge-template-generator --break-system-packages
 RUN npm install -g npm
 RUN npm install -g atcoder-cli
 USER ${USER}
