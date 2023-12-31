@@ -11,7 +11,9 @@
 				"-g",
 				"${file}",
 				"-o",
-				"${workspaceFolder}/a.out"
+				"${workspaceFolder}/a.out",
+				"-I",
+				"~/library"
 			],
 			"options": {
 				"cwd": "${fileDirname}"

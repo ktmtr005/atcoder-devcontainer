@@ -12,7 +12,6 @@ services:
 
     volumes:
       - ../AtCoder:/home/vscode/AtCoder:cached
-      - ../library:/home/vscode/library:cached
       - ../.vscode:/home/vscode/.vscode:cached
       - ../note:/home/vscode/note:cached
     

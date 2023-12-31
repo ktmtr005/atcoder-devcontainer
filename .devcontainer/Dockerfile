@@ -11,7 +11,7 @@ RUN groupadd --gid 1000 ${USER} \
 
 # C++, Python3, PyPy3 のインストール
 RUN apt-get update \
-    && apt-get install -y time tzdata tree git curl \
+    && apt-get install -y time tzdata tree git curl wget unzip\
     && apt-get install -y gcc g++ gdb python3 python3-pip pypy3
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - &&\
     apt-get install -y nodejs
@@ -21,7 +21,7 @@ USER ${USER}
 WORKDIR /home/${USER}
 
 # Pythonライブラリをインストール
-RUN pip --default-timeout=10000 install numpy==1.24.1 \
+RUN pip --default-timeout=100000 install numpy==1.24.1 \
 scipy==1.10.1 \
 networkx==3.0 \
 sympy==1.11.1 \
@@ -47,7 +47,7 @@ git+https://github.com/not522/ac-library-python \
 
 # コンテスト補助アプリケーションをインストール
 USER root
-RUN pip install online-judge-tools --break-system-packages
+RUN pip install online-judge-tools online-judge-template-generator --break-system-packages
 RUN npm install -g npm
 RUN npm install -g atcoder-cli
 USER ${USER}
@@ -55,3 +55,12 @@ RUN echo 'export PATH="~/.local/bin:$PATH"' >> ~/.bashrc
 
 # Rust をインストール
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+
+# Atcoder Library をインストール
+USER ${USER}
+RUN mkdir /home/${USER}/.temp \
+&& wget -P /home/${USER}/.temp/ https://img.atcoder.jp/practice2/ac-library.zip \
+&& unzip /home/${USER}/.temp/*.zip -d /home/${USER}/.temp \
+&& mkdir -p /home/${USER}/library/atcoder \
+&& cp -r /home/${USER}/.temp/atcoder /home/${USER}/library/ \
+&& cp /home/${USER}/.temp/expander.py /home/${USER}/library

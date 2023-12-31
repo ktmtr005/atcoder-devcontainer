@@ -4,7 +4,7 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
-                "/home/vscode/library/ac-library/"
+                "/home/vscode/library/atcoder/"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",
