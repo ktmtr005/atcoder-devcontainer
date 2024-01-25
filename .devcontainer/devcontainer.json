@@ -27,7 +27,10 @@
 				"ms-vscode.cpptools", // C/C++ IntelliSense (Microsoft)
 				"visualstudioexptteam.vscodeintellicode", // AI-assisted development (Microsoft)
 				"yzhang.markdown-all-in-one", // Markdown
-				"zainchen.json" // Json
+				"zainchen.json", // Json
+				"tamasfe.even-better-toml", // Even Better TOML
+				"vadimcn.vscode-lldb", // CodeLLDB
+				"rust-lang.rust-analyzer" // rust-analyzer
 			]
 		}
 	},

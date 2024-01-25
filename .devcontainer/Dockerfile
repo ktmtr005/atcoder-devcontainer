@@ -11,7 +11,7 @@ RUN groupadd --gid 1000 ${USER} \
 
 # C++, Python3, PyPy3 のインストール
 RUN apt-get update \
-    && apt-get install -y time tzdata tree git curl wget unzip\
+    && apt-get install -y time tzdata tree git curl wget unzip libssl-dev\
     && apt-get install -y gcc g++ gdb python3 python3-pip pypy3
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - &&\
     apt-get install -y nodejs
@@ -64,3 +64,6 @@ RUN mkdir /home/${USER}/.temp \
 && mkdir -p /home/${USER}/library/atcoder \
 && cp -r /home/${USER}/.temp/atcoder /home/${USER}/library/ \
 && cp /home/${USER}/.temp/expander.py /home/${USER}/library
+
+# cargo-generate をインストール
+RUN OPENSSL_LIB_DIR=/usr/lib/x86_64-linux-gnu OPENSSL_INCLUDE_DIR=/usr/include/openssl  OPENSSL_DIR=/usr/bin /home/vscode/.cargo/bin/cargo install cargo-generate
