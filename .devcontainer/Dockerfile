@@ -66,4 +66,11 @@ RUN mkdir /home/${USER}/.temp \
 && cp /home/${USER}/.temp/expander.py /home/${USER}/library
 
 # cargo-generate をインストール
-RUN OPENSSL_LIB_DIR=/usr/lib/x86_64-linux-gnu OPENSSL_INCLUDE_DIR=/usr/include/openssl  OPENSSL_DIR=/usr/bin /home/vscode/.cargo/bin/cargo install cargo-generate
+# RUN OPENSSL_LIB_DIR=/usr/lib/x86_64-linux-gnu OPENSSL_INCLUDE_DIR=/usr/include/openssl  OPENSSL_DIR=/usr/bin /home/${USER}/.cargo/bin/cargo install cargo-generate
+
+# cargo-compete をインストール
+RUN OPENSSL_LIB_DIR=/usr/lib/x86_64-linux-gnu OPENSSL_INCLUDE_DIR=/usr/include/openssl  OPENSSL_DIR=/usr/bin /home/${USER}/.cargo/bin/cargo install cargo-compete
+
+RUN echo 'export OPENSSL_LIB_DIR=/usr/lib/x86_64-linux-gnu' >> ~/.bashrc \
+&& echo 'export OPENSSL_INCLUDE_DIR=/usr/include/openssl' >> ~/.bashrc \
+&& echo 'export OPENSSL_DIR=/usr/bin' >> ~/.bashrc 
