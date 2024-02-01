@@ -1,5 +1,0 @@
-{
-    "cmake.sourceDirectory": "${workspaceFolder}/.vscode-server/extensions/twxs.cmake-0.0.17/node_modules/peg-cmake/test",
-    "C_Cpp.clang_format_style": "Google",
-    "editor.tabSize": 4
-}
