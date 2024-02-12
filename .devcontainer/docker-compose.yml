@@ -13,6 +13,5 @@ services:
     volumes:
       - ../AtCoder:/home/vscode/AtCoder:cached
       - ../.vscode:/home/vscode/.vscode:cached
-      - ../note:/home/vscode/note:cached
     
     command: /bin/sh -c "while sleep 1000; do :; done"

@@ -7,7 +7,7 @@
 		"docker-compose.yml"
 	],
 	"service": "dev",
-	"workspaceFolder": "/home/vscode",
+	"workspaceFolder": "/home/vscode/AtCoder",
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
