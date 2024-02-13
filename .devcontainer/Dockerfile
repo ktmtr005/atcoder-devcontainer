@@ -7,14 +7,17 @@ ARG TZ=Asia/Tokyo
 # ユーザーを作成
 ARG USER="vscode"
 RUN groupadd --gid 1000 ${USER} \
-    && useradd --uid 1000 --gid 1000 -m ${USER}
+&& useradd --uid 1000 --gid 1000 -m ${USER}
 
 # C++, Python3, PyPy3 のインストール
 RUN apt-get update \
-    && apt-get install -y time tzdata tree git curl wget unzip libssl-dev\
-    && apt-get install -y gcc g++ gdb python3 python3-pip pypy3
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - &&\
-    apt-get install -y nodejs
+&& apt-get install -y --no-install-recommends time tzdata tree git curl wget unzip libssl-dev gcc g++ gdb python3 python3-pip pypy3 \
+&& apt-get clean \
+&& rm -rf /var/lib/apt/lists/*
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+&& apt-get install -y --no-install-recommends nodejs \
+&& apt-get clean \
+&& rm -rf /var/lib/apt/lists/*
 
 # ユーザーを変更
 USER ${USER}
@@ -22,13 +25,16 @@ WORKDIR /home/${USER}
 
 # Pythonライブラリをインストール
 COPY requirements.txt /home/${USER}/
-RUN pip --default-timeout=100000 install -r /home/${USER}/requirements.txt --break-system-packages
+RUN pip --default-timeout=100000 install -r /home/${USER}/requirements.txt --break-system-packages \
+&& pip cache purge
 
 # コンテスト補助アプリケーションをインストール
 USER root
-RUN pip install online-judge-tools online-judge-template-generator --break-system-packages
-RUN npm install -g npm
-RUN npm install -g atcoder-cli
+RUN pip install online-judge-tools online-judge-template-generator --break-system-packages \
+&& pip cache purge
+RUN npm install -g npm \
+&& npm install -g atcoder-cli
+RUN npm cache clean --force
 USER ${USER}
 RUN echo 'export PATH="~/.local/bin:$PATH"' >> ~/.bashrc
 
